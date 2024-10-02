@@ -1,0 +1,58 @@
+-- Script para creación de tablas
+
+-- Crea tabla usuario
+CREATE TABLE Usuario (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    contraseña VARCHAR(255) NOT NULL,
+    tipo INTEGER NOT NULL
+);
+
+-- Crea tabla carrera
+CREATE TABLE Carrera (
+    id SERIAL PRIMARY KEY,
+    nombre_carrera VARCHAR(255) NOT NULL
+);
+
+-- Crea tabla asesor
+CREATE TABLE Asesor (
+    id_matricula INTEGER PRIMARY KEY,
+    genero VARCHAR(50) NOT NULL,
+    nombre VARCHAR(255) NOT NULL,
+    id_carrera INTEGER NOT NULL,
+    FOREIGN KEY (id_carrera) REFERENCES Carrera(id)
+);
+
+-- Crea tabla asesorado
+CREATE TABLE Asesorado (
+    id_matricula INTEGER PRIMARY KEY,
+    genero VARCHAR(50) NOT NULL,
+    nombre VARCHAR(255) NOT NULL,
+    id_carrera INTEGER NOT NULL,
+    FOREIGN KEY (id_carrera) REFERENCES Carrera(id)
+);
+
+-- Crea tabla unidad de aprendizaje
+CREATE TABLE Unidad_Aprendizaje (
+    id SERIAL PRIMARY KEY,
+    nombre_unidad_aprendizaje VARCHAR(255) NOT NULL,
+    id_carrera INTEGER NOT NULL,
+    FOREIGN KEY (id_carrera) REFERENCES Carrera(id)
+);
+
+-- Crea tabla asesoria
+CREATE TABLE Asesoria (
+    id SERIAL PRIMARY KEY,
+    id_unidad_aprendizaje INTEGER NOT NULL,
+    tema VARCHAR(255) NOT NULL,
+    profesor VARCHAR(255) NOT NULL,
+    tipo_clase VARCHAR(100) NOT NULL,
+    id_asesor INTEGER NOT NULL,
+    id_asesorado INTEGER NOT NULL,
+    fecha DATE NOT NULL,
+    hora_inicio TIMESTAMP NOT NULL,
+    hora_fin TIMESTAMP NOT NULL,
+    FOREIGN KEY (id_unidad_aprendizaje) REFERENCES Unidad_Aprendizaje(id),
+    FOREIGN KEY (id_asesor) REFERENCES Asesor(id_matricula),
+    FOREIGN KEY (id_asesorado) REFERENCES Asesorado(id_matricula)
+);

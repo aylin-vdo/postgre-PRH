@@ -2,7 +2,7 @@
 
 -- Create table Users
 CREATE TABLE Users (
-    Enrollment INTEGER PRIMARY KEY,
+    UserID INTEGER PRIMARY KEY,
     Name VARCHAR(255) NOT NULL,
     Password VARCHAR(255) NOT NULL,
     Type INTEGER NOT NULL,
@@ -14,7 +14,7 @@ CREATE TABLE Users (
 );
 
 COMMENT ON TABLE Users IS 'Stores information about users';
-COMMENT ON COLUMN Users.Enrollment IS 'Primary key for user';
+COMMENT ON COLUMN Users.UserID IS 'Primary key for user';
 COMMENT ON COLUMN Users.Name IS 'Name of the user';
 COMMENT ON COLUMN Users.Password IS 'Password for the user account';
 COMMENT ON COLUMN Users.Type IS 'Type of user (e.g., admin, regular)';
@@ -46,7 +46,7 @@ COMMENT ON COLUMN Degrees.Active IS 'Indicates whether the record is active (tru
 
 -- Create table Advisors
 CREATE TABLE Advisors (
-    Enrollment INTEGER PRIMARY KEY,
+    StudentIDNumber INTEGER PRIMARY KEY,
     Gender VARCHAR(50) NOT NULL,
     Name VARCHAR(255) NOT NULL,
     DegreeIdentity INTEGER NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE Advisors (
 );
 
 COMMENT ON TABLE Advisors IS 'Stores information about advisors';
-COMMENT ON COLUMN Advisors.Enrollment IS 'Primary key for advisor, using enrollment ID';
+COMMENT ON COLUMN Advisors.StudentIDNumber IS 'Primary key for advisor, using StudentIDNumber ID';
 COMMENT ON COLUMN Advisors.Gender IS 'Gender of the advisor';
 COMMENT ON COLUMN Advisors.Name IS 'Name of the advisor';
 COMMENT ON COLUMN Advisors.DegreeIdentity IS 'Foreign key to degree table';
@@ -71,7 +71,7 @@ COMMENT ON COLUMN Advisors.Active IS 'Indicates whether the record is active (tr
 
 -- Create table Advisees
 CREATE TABLE Advisees (
-    Enrollment INTEGER PRIMARY KEY,
+    StudentIDNumber INTEGER PRIMARY KEY,
     Gender VARCHAR(50) NOT NULL,
     Name VARCHAR(255) NOT NULL,
     DegreeIdentity INTEGER NOT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE Advisees (
 );
 
 COMMENT ON TABLE Advisees IS 'Stores information about advisees';
-COMMENT ON COLUMN Advisees.Enrollment IS 'Primary key for advisee, using enrollment ID';
+COMMENT ON COLUMN Advisees.StudentIDNumber IS 'Primary key for advisee, using StudentIDNumber ID';
 COMMENT ON COLUMN Advisees.Gender IS 'Gender of the advisee';
 COMMENT ON COLUMN Advisees.Name IS 'Name of the advisee';
 COMMENT ON COLUMN Advisees.DegreeIdentity IS 'Foreign key to degree table';
@@ -135,8 +135,8 @@ CREATE TABLE AdvisorySessions (
     UpdatedAt TIMESTAMP NOT NULL,
     Active BOOLEAN NOT NULL,
     FOREIGN KEY (LearningUnitIdentity) REFERENCES LearningUnits(Identity),
-    FOREIGN KEY (AdvisorIdentity) REFERENCES Advisors(Enrollment),
-    FOREIGN KEY (AdviseeIdentity) REFERENCES Advisees(Enrollment)
+    FOREIGN KEY (AdvisorIdentity) REFERENCES Advisors(StudentIDNumber),
+    FOREIGN KEY (AdviseeIdentity) REFERENCES Advisees(StudentIDNumber)
 );
 
 COMMENT ON TABLE AdvisorySessions IS 'Stores information about advisory sessions';

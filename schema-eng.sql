@@ -155,3 +155,29 @@ COMMENT ON COLUMN AdvisorySessions.CreatedAt IS 'Timestamp when the record was c
 COMMENT ON COLUMN AdvisorySessions.UserUpdate IS 'User who last updated the record';
 COMMENT ON COLUMN AdvisorySessions.UpdatedAt IS 'Timestamp when the record was last updated';
 COMMENT ON COLUMN AdvisorySessions.Active IS 'Indicates whether the record is active (true) or inactive (false)';
+
+CREATE TABLE EntryExitRecord (
+    Identity SERIAL PRIMARY KEY,
+    AdvisorIdentity INTEGER NOT NULL,
+    EntryTime TIMESTAMP NOT NULL,
+    ExitTime TIMESTAMP NOT NULL,
+    CurrentDate DATE NOT NULL,
+    UserCreation INTEGER NOT NULL,
+    CreatedAt TIMESTAMP NOT NULL,
+    UserUpdate INTEGER NOT NULL,
+    UpdatedAt TIMESTAMP NOT NULL,
+    Active BOOLEAN NOT NULL,
+    FOREIGN KEY (AdvisorIdentity) REFERENCES Advisors(StudentIDNumber)
+);
+
+COMMENT ON TABLE EntryExitRecord IS 'Stores records of the entry and exit times of every advisor as well as the date';
+COMMENT ON COLUMN EntryExitRecord.Identity IS 'Primary key for the record';
+COMMENT ON COLUMN EntryExitRecord.AdvisorIdentity IS 'Foreign key to advisor table';
+COMMENT ON COLUMN EntryExitRecord.EntryTime IS 'Time at which the advisor clocked in';
+COMMENT ON COLUMN EntryExitRecord.ExitTime IS 'Time at which the advisor clocked out';
+COMMENT ON COLUMN EntryExitRecord.CurrentDate IS 'Date of the entry and exit records for the advisor';
+COMMENT ON COLUMN EntryExitRecord.UserCreation IS 'User who created the record';
+COMMENT ON COLUMN EntryExitRecord.CreatedAt IS 'Timestamp when the record was create':
+COMMENT ON COLUMN EntryExitRecord.UserUpdate IS 'User who last updated the record';
+COMMENT ON COLUMN EntryExitRecord.UpdatedAt IS 'Timestamp when the record was last updated';
+COMMENT ON COLUMN EntryExitRecord.Active IS 'Indicates whether the record is active (true) or inactive (false)';

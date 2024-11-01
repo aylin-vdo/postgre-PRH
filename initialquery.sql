@@ -120,7 +120,7 @@ CREATE TABLE AdvisorySessions (
     LearningUnitIdentity INTEGER REFERENCES LearningUnits(Identity) NOT NULL,
     Topic VARCHAR(255) NOT NULL,
     Professor VARCHAR(255) NOT NULL,
-    ClassType VARCHAR(100) NOT NULL --CHECK (ClassType IN ('Clase Ordinaria', 'Sabatino', 'Autogestivo')),
+    ClassType VARCHAR(100) NOT NULL,
     AdvisorIdentity INTEGER REFERENCES Advisors(StudentIDNumber) NOT NULL,
     AdviseeIdentity INTEGER REFERENCES Advisees(StudentIDNumber) NOT NULL,
     SessionDate DATE NOT NULL,
@@ -170,7 +170,7 @@ COMMENT ON COLUMN EntryExitRecord.EntryTime IS 'Time at which the advisor clocke
 COMMENT ON COLUMN EntryExitRecord.ExitTime IS 'Time at which the advisor clocked out';
 COMMENT ON COLUMN EntryExitRecord.CurrentDate IS 'Date of the entry and exit records for the advisor';
 COMMENT ON COLUMN EntryExitRecord.UserCreation IS 'User who created the record';
-COMMENT ON COLUMN EntryExitRecord.CreatedAt IS 'Timestamp when the record was create':
+COMMENT ON COLUMN EntryExitRecord.CreatedAt IS 'Timestamp when the record was created';
 COMMENT ON COLUMN EntryExitRecord.UserUpdate IS 'User who last updated the record';
 COMMENT ON COLUMN EntryExitRecord.UpdatedAt IS 'Timestamp when the record was last updated';
 COMMENT ON COLUMN EntryExitRecord.Active IS 'Indicates whether the record is active (true) or inactive (false)';
